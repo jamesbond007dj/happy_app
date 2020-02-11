@@ -8,7 +8,6 @@ import {
     Redirect,
   } from "react-router-dom";
 
-import './App.scss';
 import LoginForm from './components/LoginForm';
 import EntryList from './components/EntryList';
 import EntryDetail from './components/EntryDetail';
