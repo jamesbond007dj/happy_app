@@ -11,4 +11,4 @@ export default props => (
     <>
 )
 
-export default Header;
+export default Header,
