@@ -10,9 +10,9 @@ class EntryListView(generics.ListCreateAPIView):
 class EntryDetailView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Entry.objects.all()
   serializer_class = EntrySerializer
-  permission_classes = (IsAuthorOrReadOnly)
+  permission_classes = (IsAuthorOrReadOnly,)
 
 class AddDetailView(generics.RetrieveUpdateDestroyAPIView):
   queryset = Entry.objects.all()
   serializer_class = EntrySerializer
-  permission_classes = (IsAuthorOrReadOnly)
+  permission_classes = (IsAuthorOrReadOnly,)
