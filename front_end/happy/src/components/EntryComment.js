@@ -6,14 +6,15 @@ class EntryComment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: entry.title,
-            description: entry.description,
+            title: props.entry.title,
+            description: props.entry.description,
         }
         this.changeHandler = this.changeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
     }
 
-    static defaultProps entry: {
+    static defaultProps = {
+        entry: {
             title: '',
             description: '',
         }
