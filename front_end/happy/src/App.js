@@ -22,13 +22,32 @@ class App extends React.Component {
         this.state = {
             accessToken: '',
             refreshToken:'',
-            entrys: null,
+            entrys: [],
         }
         this.loginHandler = this.loginHandler.bind(this);
         this.createHandler = this.createHandler.bind(this);
         this.updateHandler = this.updateHandler.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
         this.renderEntryDetail = this.renderEntryDetail.bind(this);
+    }
+    
+    async componentDidMount() {
+
+        try {
+            const response = await axios.get(url + 'v1/');
+
+            console.log(response.data);
+    
+            this.setState({
+                entrys: response.data
+            });
+        }
+        catch (error){
+            console.error(error)
+        }
+
+
+
     }
 
     async loginHandler({access, refresh}) {
@@ -43,7 +62,7 @@ class App extends React.Component {
                     Authorization: `Bearer ${this.state.accessToken}`
                 }
             }
-            const response = await axios.get(url + 'v1/', headers);
+            const response = await axios.get(url + 'v1/');
 
             console.log(response.data);
 
@@ -65,7 +84,7 @@ class App extends React.Component {
             }
         }
 
-        const response = await axios.post(url + 'v1/', data, headers);
+        const response = await axios.post(url + 'v1/', data);
 
         console.log(response.data);
 
@@ -87,7 +106,7 @@ class App extends React.Component {
         const path = `${url}v1/${data.id}`;
 
         console.log('path', path);
-        const response = await axios.put(path, data, headers);
+        const response = await axios.put(path, data);
 
         console.log(response.data);
 
@@ -115,7 +134,7 @@ class App extends React.Component {
 
         console.log('path', path);
 
-        const response = await axios.delete(path, headers);
+        const response = await axios.delete(path);
 
         console.log(response.data);
 
@@ -127,9 +146,9 @@ class App extends React.Component {
 
     renderEntryDetail(props) {
 
-        if (!this.state.accessToken) {
-            return <Redirect to="/" />
-        }
+        // if (!this.state.accessToken) {
+        //     return <Redirect to="/" />
+        // }
 
         const entryId = parseInt(props.match.params.id);
 
@@ -153,9 +172,10 @@ class App extends React.Component {
 
                     <Route exact path="/">
 
-                        {this.state.entrys ?
+                        {/* {this.state.entrys ?
                             <EntryList entrys={this.state.entrys} onSubmit={this.createHandler} /> :
-                            <LoginForm onSuccess={this.loginHandler} />}
+                            <LoginForm onSuccess={this.loginHandler} />} */}
+                         <EntryList entrys={this.state.entrys} onSubmit={this.createHandler} /> :
 
                     </Route>
 
