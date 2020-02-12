@@ -18,12 +18,9 @@ export default props => (
 const EntryItem = props => (
     <li>
         <Link to={`/${props.entry.id}`}>
-            <p>
-                {props.entry.title}
-                {props.entry.description}
-                {props.entry.menu}
-                {props.entry.address}
-            </p>
+        <img>{props.entry.image}</img>
+        <p>{props.entry.title}</p>
+
         </Link>
     </li>
 )
