@@ -2,7 +2,9 @@
   text-align: center;
 }
 body {
-  background-color: blue;
+  background: url(https://c1.wallpaperflare.com/preview/75/797/190/neon-neon-font-advertisement-advertising.jpg) no-repeat;
+  /* background-color: beige; */
+  background-size: cover;
 }
 
 input { 
@@ -22,4 +24,34 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+button {
+  border-radius: 0%;
+  padding: 14px 400px;
+  background-color: #e7e7e7; color: black;
+}
+
+fieldset {
+  border:2px solid blue;
+  border-radius:8px;
+  color: white;
+}
+
+.form {
+  /* padding: 100px; */
+  margin-top: 600px;
+}
+
+
+li {
+  list-style-type: none;
+  color: white;
+  font-size: 5vw;
+  border:1px solid white;
+  background-color: green;
+
+}
+.header {
+  color: aqua;
 }

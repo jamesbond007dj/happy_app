@@ -40,6 +40,7 @@ class EntryForm extends Component {
     render() {
         return (
             <>
+            <div className='form'>
                 <form onSubmit={this.submitHandler}>
                     <fieldset>
                         <legend>
@@ -50,6 +51,7 @@ class EntryForm extends Component {
                         <button>ok</button>
                     </fieldset>
                 </form>
+            </div>
             </>
         )
     }
