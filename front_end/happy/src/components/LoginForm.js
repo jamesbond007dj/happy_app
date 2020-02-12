@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const url = 'http://165.227.18.226:8000/api/';
+const url = 'http://206.189.212.188:8000/api/';
 
 class LoginForm extends Component {
 
