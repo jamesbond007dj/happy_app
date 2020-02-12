@@ -6,9 +6,10 @@ import EntryForm from './EntryForm'
 
 export default props => (
     <>
-        <h2>Happy Hour List</h2>
+        <h2 className='header'>Happy Hour List</h2>
         <ul>
             {props.entrys.map(entry => <EntryItem key={entry.id} entry={entry} />)}
+            <li>Example list</li>
         </ul>
         <EntryForm onSubmit={props.onSubmit} />
     </>
