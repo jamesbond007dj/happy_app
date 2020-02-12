@@ -20,6 +20,9 @@ const EntryItem = props => (
         <Link to={`/${props.entry.id}`}>
             <p>
                 {props.entry.title}
+                {props.entry.description}
+                {props.entry.menu}
+                {props.entry.address}
             </p>
         </Link>
     </li>
