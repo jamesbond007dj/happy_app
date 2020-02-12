@@ -30,6 +30,8 @@ class App extends React.Component {
         this.updateHandler = this.updateHandler.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
         this.renderEntryDetail = this.renderEntryDetail.bind(this);
+        this.renderEntryForum = this.renderEntryForum.bind(this);
+        this.renderLoginForum = this.renderLoginForum.bind(this);
     }
     
     async componentDidMount() {
@@ -145,11 +147,47 @@ class App extends React.Component {
 
     }
 
-    renderEntryDetail(props) {
+    renderEntryForm(props) {
 
         // if (!this.state.accessToken) {
         //     return <Redirect to="/" />
         // }
+
+        const entryId = parseInt(props.match.params.id);
+
+        const entry = this.state.entrys && this.state.entrys.find(entry => entry.id === entryId);
+
+        if (entry) {
+            return <this.EntryForm entry={entry} onSubmit={this.updateHandler} onDelete={this.deleteHandler} />
+        } else {
+            return <Redirect to="/" />
+        }
+    }
+
+
+    renderLoginForm(props) {
+
+        // if (!this.state.accessToken) {
+        //     return <Redirect to="/" />
+        // }
+
+        const entryId = parseInt(props.match.params.id);
+
+        const entry = this.state.entrys && this.state.entrys.find(entry => entry.id === entryId);
+
+
+        if (entry) {
+            return <this.LoginForm entry={entry} onSubmit={this.updateHandler} onDelete={this.deleteHandler} />
+        } else {
+            return <Redirect to="/" />
+        }
+    }
+
+    renderEntryDetail(props) {
+
+        if (!this.state.accessToken) {
+            return <Redirect to="/" />
+        }
 
         const entryId = parseInt(props.match.params.id);
 
@@ -161,8 +199,6 @@ class App extends React.Component {
             return <Redirect to="/" />
         }
     }
-
-
     render() {
         return (
             <Router>
@@ -191,3 +227,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+{/* <LoginForm onSuccess={this.loginHandler} />} */}
