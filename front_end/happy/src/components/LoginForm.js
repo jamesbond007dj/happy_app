@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import '../App.css';
+import EntryForm from './EntryForm';
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+} from "react-router-dom";
+
+import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, NavLink } from 'reactstrap';
+
+
 
 const url = 'http://206.189.212.188:8000/api/';
 
@@ -10,9 +23,11 @@ class LoginForm extends Component {
         this.state = {
             username: '',
             password: '',
+            redirectToForm: false,
         }
         this.obtainTokens = this.obtainTokens.bind(this);
         this.changeHandler = this.changeHandler.bind(this);
+        this.routeChangeTwo = this.routeChangeTwo.bind(this);
     }
 
     changeHandler(event) {
@@ -41,16 +56,57 @@ class LoginForm extends Component {
 
     }
 
+    routeChangeTwo() {
+        
+        this.setState({
+            redirectToForm: true,
+        })
+
+    }
+
     render() {
-        return (<>
-            <form onSubmit={this.obtainTokens}>
-                <input name="username" type="text" value={this.state.username} placeholder="username" onChange={this.changeHandler}/>
-                <input name="password" type="password" value={this.state.password} placeholder="password" onChange={this.changeHandler}/>
-                <button>ok</button>
-            </form>
-        </>)
+        return (
+            <Router>
+
+            <div className="App">
+
+                <Switch>
+
+                    <Route exact path="/login">
+                        <form onSubmit={this.obtainTokens}>
+                            <input name="username" type="text" value={this.state.username} placeholder="username" onChange={this.changeHandler}/>
+                            <input name="password" type="password" value={this.state.password} placeholder="password" onChange={this.changeHandler}/>
+                            <button onClick={this.routeChangeTwo}>ok</button>
+                        </form>
+                        {this.state.redirectToForm ? <Redirect to="/form" /> : 
+                        <EntryForm  routeChangeTwo={this.routeChangeTwo} />
+                    }
+                    </Route>
+                    <Route exact path="/form" component={EntryFormPage} />
+                 
+                       
+
+                  
+
+                </Switch>
+
+            </div> 
+        </Router>
+        
+      )
     }
 
 }
 
+
+
+
+function EntryFormPage(props) {
+    return (
+        <div>
+            <EntryForm />
+  
+        </div>
+        )
+}
 export default LoginForm;

@@ -10,5 +10,4 @@ export default props => (
         <p>Come-on Join Cool  Happy Hours : {props.count}</p>
     <>
 )
-
 export default Header,

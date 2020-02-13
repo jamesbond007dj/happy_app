@@ -5,8 +5,27 @@ import EntryComment from './EntryComment'
 
 export default props => (
     <>
-        <Link to="/"><p>Happy Hour List</p></Link>
-        <button className='deleteButton' onClick={() => props.onDelete(props.entry.id)}>delete</button>
-        <EntryComment onSubmit={props.onSubmit} entry={props.entry} />
-    </>
+    <h2 className='header'>Happy Hour List</h2>
+    <ul>
+        {props.entrys.map(entry => <EntryItem key={entry.id} entry={entry} />)}
+        <li>HAPPPY HOUR LIST</li>
+    </ul>
+    
+</>
+)
+
+const EntryItem = props => (
+<li>
+    <Link to={`/${props.entry.id}`}>
+        <p>
+            {props.entry.title}
+        </p>
+        <p>
+            {props.entry.menu}
+        </p>
+        <p>
+            {props.entry.menu}
+        </p>
+    </Link>
+</li>
 )
