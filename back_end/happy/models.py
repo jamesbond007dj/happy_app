@@ -2,22 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 
-DAYS = [
-    ('mon', 'Monday'),
-    ('tue', 'Tuesday'),
-    ('wed', 'Wednesday'),
-    ('thu', 'Thursday'),
-    ('fri', 'Friday'),
-    ('sat', 'Saturday'),
-    ('sun', 'Sunday'),
-]
-MON = 'mon'
-TUE = 'tue'
-WED = 'wed'
-THU = 'thu'
-FRI = 'fri'
-SAT = 'sat'
-SUN = 'sun'
+MON = 'Monday'
+TUE = 'Tuesday'
+WED = 'Wednesday'
+THU = 'Thursday'
+FRI = 'Friday'
+SAT = 'Saturday'
+SUN = 'Sunday'
 
 class Entry(models.Model):
   author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -30,15 +21,22 @@ class Entry(models.Model):
 
   @property
   def times(self):
-    return[
-          "Monday 4:00 PM - 6:00 PM",
-          "Tuesday 4:00 PM - 6:00 PM",
-          "Wednesday 4:00 PM - 6:00 PM",
-          "Thursday 4:00 PM - 6:00 PM",
-          "Friday 4:00 PM - 6:00 PM",
-          "Saturday 4:00 PM - 6:00 PM",
-          "Sunday 4:00 PM - 6:00 PM",
-          ]
+    start_times = self.starttime_set.all()
+    end_times = self.endtime_set.all()
+    zipped_times = zip(start_times,end_times)
+    times_list = []
+
+    for time_pair in zipped_times:
+      start_time_obj = time_pair[0]
+      end_time_obj = time_pair[1]
+      start_time_day = start_time_obj.day
+      start_time = start_time_obj.time
+      start_time_str = start_time.strftime('%H:%M')
+      end_time = end_time_obj.time 
+      end_time_str = end_time.strftime('%H:%M')
+      times_list.append(f'{start_time_day} {start_time_str} - {end_time_str}')
+
+    return times_list        
   
   def __str__(self):
     return self.title
