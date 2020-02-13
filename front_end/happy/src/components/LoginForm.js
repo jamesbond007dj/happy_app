@@ -100,7 +100,6 @@ class LoginForm extends Component {
 
 
 
-
 function EntryFormPage(props) {
     return (
         <div>
