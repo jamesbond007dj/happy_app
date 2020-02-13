@@ -21,42 +21,28 @@ class AddDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class CurrentListView(generics.ListAPIView):
   serializer_class = EntrySerializer
-  # def get_querysetxxx(self):
-  #   today = day_name[datetime.today().weekday()].lower()
-  #   ## monday equals 0, sunday equals 6
-  #   start_time_1 = today + '_start_time_1'
-  #   start_time_2 = today + '_start_time_2'
-  #   end_time_1 = today + '_end_time_1'
-  #   end_time_2 = today + '_end_time_2'
-  #   current_time = datetime.now().strftime('%X')
-  #   return Entry.objects.all().filter(start_time_1__lte=current_time).filter(end_time_1__gte=current_time)
 
   def get_queryset(self):
-    today = day_name[datetime.today().weekday()].lower()
     current = []
     for e in Entry.objects.all():
       start_times = StartTime.objects.filter(entry=e.id)
       end_times = EndTime.objects.filter(entry=e.id)
       times = zip(start_times, end_times)
-      thing = is_current(e,times)
-      if thing:
-        current.append((e, thing))
-        return 
+      if is_current(e,times):
+        current.append(e)
 
     return current
 
 def is_current(e,times):
-  # day_start_time_1 = today + '_start_time_1'
-  # day_end_time_1 = today + '_end_time_1'
-  # day_start_time_2 = today + '_start_time_2'
-  # day_end_time_2 = today + '_end_time_2'
   current_time = datetime.now().time()
-  # entry_start_time_1 = e.__dict__[day_start_time_1]
-  # entry_end_time_1 = e.__dict__[day_end_time_1]
-  # entry_start_time_2 = e.__dict__[day_start_time_2]
-  # entry_end_time_2 = e.__dict__[day_end_time_2]
+  today = day_name[datetime.today().weekday()]
+
   for time_pair in times:
-    if current_time > time_pair[0].time and current_time < time_pair[1].time:
-      return True
+    today_start_time = time_pair[0].time
+    today_end_time = time_pair[1].time
+    today_day = time_pair[0].day
+    if today == today_day:
+      if current_time >= today_start_time and current_time < today_end_time:
+        return True
     else:
       return False
