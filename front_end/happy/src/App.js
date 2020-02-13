@@ -26,6 +26,7 @@ class App extends React.Component {
             accessToken: '',
             refreshToken:'',
             entrys: [],
+            loading: true,
         }
         this.loginHandler = this.loginHandler.bind(this);
         this.createHandler = this.createHandler.bind(this);
@@ -44,7 +45,8 @@ class App extends React.Component {
             console.log(response.data);
     
             this.setState({
-                entrys: response.data
+                entrys: response.data,
+                loading: false,
             });
         }
         catch (error){
@@ -212,9 +214,9 @@ class App extends React.Component {
 
     renderEntryDetail(props) {
 
-        // if (!this.state.accessToken) {
-        //     return <Redirect to="/" />
-        // }
+        if (this.state.loading) {
+            return <h2>Loading....</h2>
+        }
 
         const entryId = parseInt(props.match.params.id);
 
