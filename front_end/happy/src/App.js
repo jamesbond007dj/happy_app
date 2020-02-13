@@ -212,9 +212,9 @@ class App extends React.Component {
 
     renderEntryDetail(props) {
 
-        if (!this.state.accessToken) {
-            return <Redirect to="/" />
-        }
+        // if (!this.state.accessToken) {
+        //     return <Redirect to="/" />
+        // }
 
         const entryId = parseInt(props.match.params.id);
 

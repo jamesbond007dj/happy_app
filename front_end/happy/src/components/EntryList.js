@@ -18,7 +18,7 @@ export default props => (
 const EntryItem = props => (
     <li>
         <Link to={`/${props.entry.id}`}>
-            <img>{props.entry.image}</img>
+            {/* <img>{props.entry.image}</img> */}
             <p>
                 {props.entry.title}
             </p>

@@ -7,6 +7,7 @@ export default props => (
     <>
         <Link to="/"><p>Happy Hour List</p></Link>
         <button className='deleteButton' onClick={() => props.onDelete(props.entry.id)}>delete</button>
-        <EntryComment onSubmit={props.onSubmit} entry={props.entry} />
+        <p entry={props.entry} />
+        {/* <EntryComment onSubmit={props.onSubmit} entry={props.entry} /> */}
     </>
 )
