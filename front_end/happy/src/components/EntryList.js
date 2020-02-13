@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 
-import EntryForm from './EntryForm'
+// import EntryForm from './EntryForm'
 
 
 export default props => (
@@ -10,7 +10,7 @@ export default props => (
         <ul>
             {props.entrys.map(entry => <EntryItem key={entry.id} entry={entry} />)}
         </ul>
-        <EntryForm onSubmit={props.onSubmit} />
+        {/* <EntryForm onSubmit={props.onSubmit} /> */}
     </>
 )
 
