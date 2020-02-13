@@ -15,7 +15,7 @@ class EntryForm extends Component {
     static defaultProps = {
         entry: {
             title: '',
-            comment: '',
+            description: '',
         }
     }
 
@@ -33,7 +33,7 @@ class EntryForm extends Component {
         this.props.onSubmit(data);
         this.setState({
             title: '',
-            comment: ''
+            description: ''
         })
     }
 
@@ -44,11 +44,11 @@ class EntryForm extends Component {
                 <form onSubmit={this.submitHandler}>
                     <fieldset>
                         <legend>
-                            ADD NEW HAPPY HOUR
+                            Post
                         </legend>
                         <input name="title" type="text" placeholder="title" value={this.state.title} onChange={this.changeHandler} />
-                        <textarea name="comment" placeholder="comment" cols="30" rows="10" value={this.state.description} onChange={this.changeHandler}></textarea>
-                        <button>ok</button>
+                        <textarea name="description" placeholder="description" cols="30" rows="10" value={this.state.description} onChange={this.changeHandler}></textarea>
+                        <button className='submitButton'>ok</button>
                     </fieldset>
                 </form>
             </div>

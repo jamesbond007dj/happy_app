@@ -45,6 +45,9 @@ li a {
   /* display: block; */
   width: 200px;
 }
+ a {
+   color: aqua;
+ }
 
 li a:hover {
   font-size: 30px;
@@ -52,32 +55,59 @@ li a:hover {
 }
 
 
-input { 
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  /* background-color: lightblue; */
-
-}
-textarea { 
-  width: 500px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-button {
+/* 
+.submitButton {
   border-radius: 0%;
   padding: 14px 400px;
   background-color: #e7e7e7; color: black;
-}
+} */
 
+/* Styling for this button from https://www.w3docs.com/tools/code-editor/3985 */ 
+.submitButton {
+  display: inline-block;
+  background-color: grey;
+  border-radius: 10px;
+  border: 2px solid black;
+  color: #eeeeee;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 100%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  }
+
+  .submitButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  }
+
+  .submitButton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+  }
+
+  .submitButton:hover {
+  background-color: green;
+  }
+
+  .submitButton:hover span {
+  padding-right: 25px;
+  }
+
+  .submitButton:hover span:after {
+  opacity: 1;
+  right: 0;
+  }
+
+/* 
 fieldset {
   border:2px solid blue;
   border-radius:8px;
@@ -86,8 +116,44 @@ fieldset {
 
 .form {
   padding: 100px;
-}
+} */
 
 .header {
   color: aqua;
+  font-size: 3vw;
+}
+
+/* Form design from https://www.sanwebe.com/2014/08/css-html-forms-designs */
+
+form{
+  font: 95% Arial, Helvetica, sans-serif;
+  margin: auto;
+  /* margin-right: 500px; */
+	max-width: 400px;
+  /* margin: 50px auto;  */
+
+}
+
+input, textarea {
+	outline: none;
+	box-sizing: border-box;
+	width: 100%;
+	background: #fff;
+	margin-bottom: 4%;
+	border: 1px solid #ccc;
+	padding: 3%;
+	color: black;
+  font: 95% Arial, Helvetica, sans-serif;
+  opacity: 0.8;
+}
+fieldset {
+  font-size: 20px;
+  color: beige;
+}
+
+input:focus,
+textarea:focus{
+	box-shadow: 0 0 5px #43D1AF;
+	padding: 3%;
+	border: 1px solid #43D1AF;
 }

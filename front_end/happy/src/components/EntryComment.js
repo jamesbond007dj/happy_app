@@ -47,7 +47,7 @@ class EntryComment extends Component {
                         </legend>
                         <input name="title" type="text" placeholder="title" value={this.state.title} onChange={this.changeHandler} />
                         <textarea name="description" placeholder="description" cols="30" rows="10" value={this.state.description} onChange={this.changeHandler}></textarea>
-                        <button>ok</button>
+                        <button className='submitButton'>ok</button>
                     </fieldset>
                 </form>
             </>
