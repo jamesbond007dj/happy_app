@@ -49,11 +49,13 @@ class EntryForm extends Component {
     render() {
         return (
             <>
-                <h1>{this.state.title}</h1>
-                <p>{this.state.menu}</p>
-                <p>{this.state.times}</p>
-                <p>{this.state.address}</p>
-                <span>{this.state.description}</span>
+                <ul className='testerr'>
+                    <li className='title1'><h2>{this.state.title}</h2></li>
+                    <li className='title1'><h2>{this.state.menu}</h2></li>
+                    <li className='title1 times1'><h2>{this.state.times}</h2></li>
+                    <li className='title1'><h2>{this.state.address}</h2></li>
+                    <li className='title1'><h2>{this.state.description}</h2></li>
+                </ul>
             </>
         )
     }
