@@ -76,3 +76,7 @@ class EndTime(models.Model):
       default=MON,
   )
   entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
+
+class Comment(models.Model): 
+  comment = models.TextField(null=True,blank=True)
+  entry = models.ForeignKey(Entry, on_delete=models.CASCADE)

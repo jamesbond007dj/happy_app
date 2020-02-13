@@ -7,6 +7,7 @@ class EntrySerializer(serializers.ModelSerializer):
         model = Entry
         fields = [
             "id",
+            "author",
             "title",
             "description",
             "menu",
