@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
-import EntryForm from './EntryForm';
+import EntryAddForm from './EntryAddForm';
 
 import {
     BrowserRouter as Router,
@@ -79,14 +79,14 @@ class LoginForm extends Component {
                             <button onClick={this.routeChangeTwo}>ok</button>
                         </form>
                         {this.state.redirectToForm ? <Redirect to="/form" /> : 
-                        <EntryForm  routeChangeTwo={this.routeChangeTwo} />
+                        <EntryAddForm  routeChangeTwo={this.routeChangeTwo} />
                     }
                     </Route>
-                    <Route exact path="/form" component={EntryFormPage} />
+                    <Route exact path="/form" component={EntryAddFormPage} />
                  
                        
 
-                  
+        
 
                 </Switch>
 
@@ -100,10 +100,10 @@ class LoginForm extends Component {
 
 
 
-function EntryFormPage(props) {
+function EntryAddFormPage(props) {
     return (
         <div>
-            <EntryForm />
+            <EntryAddForm />
   
         </div>
         )
