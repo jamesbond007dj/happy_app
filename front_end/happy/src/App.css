@@ -45,6 +45,9 @@ li a {
   /* display: block; */
   width: 200px;
 }
+ a {
+   color: aqua;
+ }
 
 li a:hover {
   font-size: 30px;
@@ -53,14 +56,14 @@ li a:hover {
 
 
 /* 
-button {
+.submitButton {
   border-radius: 0%;
   padding: 14px 400px;
   background-color: #e7e7e7; color: black;
 } */
 
 /* Styling for this button from https://www.w3docs.com/tools/code-editor/3985 */ 
-button {
+.submitButton {
   display: inline-block;
   background-color: grey;
   border-radius: 10px;
@@ -74,13 +77,15 @@ button {
   cursor: pointer;
   margin: 5px;
   }
-  button span {
+
+  .submitButton span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
   }
-  button span:after {
+
+  .submitButton span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -88,13 +93,16 @@ button {
   right: -20px;
   transition: 0.5s;
   }
-  button:hover {
+
+  .submitButton:hover {
   background-color: green;
   }
-  button:hover span {
+
+  .submitButton:hover span {
   padding-right: 25px;
   }
-  button:hover span:after {
+
+  .submitButton:hover span:after {
   opacity: 1;
   right: 0;
   }
