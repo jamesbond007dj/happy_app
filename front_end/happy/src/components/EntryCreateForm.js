@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class EntryAddForm extends Component {
+class EntryCreateForm extends Component {
 
     constructor(props) {
         super(props);
@@ -49,16 +49,17 @@ class EntryAddForm extends Component {
     render() {
         return (
             <>
-             <ul>
-                <li>{this.state.title}</li>
-                <li>{this.state.menu}</li>
-                <li>{this.state.times}</li>
-                <li>{this.state.address}</li>
-                <li>{this.state.description}</li>
-             </ul>
+                <ul className='testerr'>
+                    <li className='title1'><h2>{this.state.title}</h2></li>
+                    <li className='title1'><h2>{this.state.menu}</h2></li>
+                    <li className='title1 times1'><h2>{this.state.times}</h2></li>
+                    <li className='title1'><h2>{this.state.address}</h2></li>
+                    <li className='title1'><h2>{this.state.description}</h2></li>
+                </ul>
             </>
         )
     }
 }
 
-export default EntryAddForm
+
+export default EntryCreateForm

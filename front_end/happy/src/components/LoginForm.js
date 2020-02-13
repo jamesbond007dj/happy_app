@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
-import EntryAddForm from './EntryAddForm';
+import EntryAddDetail from './EntryCreate'
 
 import {
     BrowserRouter as Router,
@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, NavLink } from 'reactstrap';
+
 
 
 
@@ -79,10 +80,10 @@ class LoginForm extends Component {
                             <button onClick={this.routeChangeTwo}>ok</button>
                         </form>
                         {this.state.redirectToForm ? <Redirect to="/form" /> : 
-                        <EntryAddForm  routeChangeTwo={this.routeChangeTwo} />
+                        <EntryAddDetail routeChangeTwo={this.routeChangeTwo} />
                     }
                     </Route>
-                    <Route exact path="/form" component={EntryAddFormPage} />
+    
                  
                        
 
@@ -100,12 +101,5 @@ class LoginForm extends Component {
 
 
 
-function EntryAddFormPage(props) {
-    return (
-        <div>
-            <EntryAddForm />
-  
-        </div>
-        )
-}
+
 export default LoginForm;
