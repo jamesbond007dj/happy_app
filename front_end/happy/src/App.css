@@ -150,3 +150,17 @@ h2 {
 
 }
 
+
+/* ABOUT CSS */
+
+
+.testimage {
+  border: 2px solid white;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+} 
+
+.bio {
+  color: white;
+}
