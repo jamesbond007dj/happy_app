@@ -55,7 +55,6 @@ def is_current(e,times):
   # entry_end_time_1 = e.__dict__[day_end_time_1]
   # entry_start_time_2 = e.__dict__[day_start_time_2]
   # entry_end_time_2 = e.__dict__[day_end_time_2]
-  # print('hallllllo',e.__dict__)
   for time_pair in times:
     if current_time > time_pair[0].time and current_time < time_pair[1].time:
       return True
