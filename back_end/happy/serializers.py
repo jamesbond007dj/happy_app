@@ -8,8 +8,8 @@ class EntrySerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "title",
-            "image",
             "description",
             "menu",
             "address",
+            'times'
         ]

@@ -22,14 +22,23 @@ SUN = 'sun'
 class Entry(models.Model):
   author = models.ForeignKey(User, on_delete=models.CASCADE)
   title = models.CharField(max_length=50)
-  # start_time = models.TimeField(null=True,blank=True)
-  # end_time = models.TimeField(null=True,blank=True)
-  image = models.ImageField(upload_to='images/',blank=True)
   description = models.TextField(null=True,blank=True)
   menu = models.TextField(null=True,blank=True)
   address = models.CharField(max_length=120,null=True,blank=True)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
+
+  @property
+  def times(self):
+    return[
+          "Monday 4:00 PM - 6:00 PM",
+          "Tuesday 4:00 PM - 6:00 PM",
+          "Wednesday 4:00 PM - 6:00 PM",
+          "Thursday 4:00 PM - 6:00 PM",
+          "Friday 4:00 PM - 6:00 PM",
+          "Saturday 4:00 PM - 6:00 PM",
+          "Sunday 4:00 PM - 6:00 PM",
+          ]
   
   def __str__(self):
     return self.title
