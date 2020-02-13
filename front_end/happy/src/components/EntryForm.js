@@ -6,6 +6,9 @@ class EntryForm extends Component {
         super(props);
         this.state = {
             title: props.entry.title,
+            menu: props.entry.menu,
+            times: props.entry.times,
+            address: props.entry.address,
             description: props.entry.description,
         }
         this.changeHandler = this.changeHandler.bind(this);
@@ -15,6 +18,9 @@ class EntryForm extends Component {
     static defaultProps = {
         entry: {
             title: '',
+            menu: '',
+            times: '',
+            address:'',
             description: '',
         }
     }
@@ -33,25 +39,21 @@ class EntryForm extends Component {
         this.props.onSubmit(data);
         this.setState({
             title: '',
-            description: ''
+            menu: '',
+            times: '',
+            address:'',
+            description: '',
         })
     }
 
     render() {
         return (
             <>
-            <div className='form'>
-                <form onSubmit={this.submitHandler}>
-                    <fieldset>
-                        <legend>
-                            Post
-                        </legend>
-                        <input name="title" type="text" placeholder="title" value={this.state.title} onChange={this.changeHandler} />
-                        <textarea name="description" placeholder="description" cols="30" rows="10" value={this.state.description} onChange={this.changeHandler}></textarea>
-                        <button className='submitButton'>ok</button>
-                    </fieldset>
-                </form>
-            </div>
+                <h1>{this.state.title}</h1>
+                <p>{this.state.menu}</p>
+                <p>{this.state.times}</p>
+                <p>{this.state.address}</p>
+                <span>{this.state.description}</span>
             </>
         )
     }
