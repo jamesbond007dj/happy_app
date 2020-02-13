@@ -7,12 +7,12 @@ import {
     Switch,
     Route,
     Redirect,
-  } from "react-router-dom";
+} from "react-router-dom";
 
 import LoginForm from './components/LoginForm';
 import EntryList from './components/EntryList';
 import EntryDetail from './components/EntryDetail';
-import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, NavLink  } from 'reactstrap';
+import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, NavLink } from 'reactstrap';
 
 
 
@@ -24,30 +24,32 @@ class App extends React.Component {
         super(props);
         this.state = {
             accessToken: '',
-            refreshToken:'',
+            refreshToken: '',
             entrys: [],
+            redirectToLogin: false,
         }
         this.loginHandler = this.loginHandler.bind(this);
         this.createHandler = this.createHandler.bind(this);
         this.updateHandler = this.updateHandler.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
         this.renderEntryDetail = this.renderEntryDetail.bind(this);
+        this.routeChange = this.routeChange.bind(this);
         // this.renderEntryForum = this.renderEntryForum.bind(this);
         // this.renderLoginForum = this.renderLoginForum.bind(this);
     }
-    
+
     async componentDidMount() {
 
         try {
             const response = await axios.get(url + 'v1/');
 
             console.log(response.data);
-    
+
             this.setState({
                 entrys: response.data
             });
         }
-        catch (error){
+        catch (error) {
             console.error(error)
         }
 
@@ -55,10 +57,10 @@ class App extends React.Component {
 
     }
 
-    async loginHandler({access, refresh}) {
+    async loginHandler({ access, refresh }) {
         this.setState({
-            accessToken : access,
-            refreshToken : refresh,
+            accessToken: access,
+            refreshToken: refresh,
         });
 
         try {
@@ -81,10 +83,10 @@ class App extends React.Component {
 
     }
 
-    async DirectHandler({access, refresh}) {
+    async DirectHandler({ access, refresh }) {
         this.setState({
-            accessToken : access,
-            refreshToken : refresh,
+            accessToken: access,
+            refreshToken: refresh,
         });
 
         try {
@@ -212,9 +214,9 @@ class App extends React.Component {
 
     renderEntryDetail(props) {
 
-        if (!this.state.accessToken) {
-            return <Redirect to="/" />
-        }
+        // if (!this.state.accessToken) {
+        //     return <Redirect to="/" />
+        // }
 
         const entryId = parseInt(props.match.params.id);
 
@@ -226,43 +228,71 @@ class App extends React.Component {
             return <Redirect to="/" />
         }
     }
+
+    routeChange() {
+        
+        this.setState({
+            redirectToLogin: true,
+        })
+
+    }
+
     render() {
         return (
             <Router>
 
-            <div className="App">
+                <div className="App">
 
-                <Switch>
+                    <Switch>
+ 
+                        <Route exact path="/">
+                            {this.state.redirectToLogin ? <Redirect to="/login" /> : 
+                            <HomePage entrys={this.state.entrys} createHandler={this.createHandler} routeChange={this.routeChange} />
+                        }
+                        </Route>
+                        <Route exact path="/login" component={LoginPage} />
+                        <Route path="/:id" render={this.renderEntryDetail} />
+                     
+                           
 
-                    <Route exact path="/">
+                      
 
-                        {/* {this.state.entrys ?
-                            <EntryList entrys={this.state.entrys} onSubmit={this.createHandler} /> :
-                            <LoginForm onSuccess={this.loginHandler} />} */}
-                         <EntryList entrys={this.state.entrys} onSubmit={this.createHandler} /> :
-                         {/* <LoginForm onSuccess={this.loginHandler} /> : */}
+                    </Switch>
 
-                        <Row>
-                            <Col xs="6">                      
-                                <Button color="primary" className="px-4" onClick={this.routeChange}>
-                                  Login
-                                </Button>
-                            </Col>
-                            <Col xs="6" className="text-right">
-                                <Button color="link" className="px-0">Forgot password?</Button>
-                            </Col>
-                        </Row>
-
-                    </Route>
-
-                    <Route path="/:id" render={this.renderEntryDetail} />
-
-                </Switch>
-
-            </div>
+                </div> 
             </Router>
         );
     }
 }
+
+function LoginPage(props) {
+    return (
+        <div>
+            <LoginForm />
+  
+        </div>
+        )
+}
+
+
+function HomePage(props) {
+    return (
+    <div>
+
+        <EntryList entrys={props.entrys} onSubmit={props.createHandler} />
+
+        <Row>
+            <Col xs="6">
+                <Button color="primary" className="px-4" onClick={props.routeChange}>
+                    Login
+                </Button>
+            </Col>
+        </Row>
+
+    </div>
+    )
+}
+
+
 
 export default App;
