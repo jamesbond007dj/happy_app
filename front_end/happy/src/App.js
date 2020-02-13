@@ -7,14 +7,17 @@ import {
     Switch,
     Route,
     Redirect,
+    NavLink,
+   
 } from "react-router-dom";
 
+import EntryCreateForm from './components/EntryCreateForm';
 import LoginForm from './components/LoginForm';
 import EntryList from './components/EntryList';
 import EntryDetail from './components/EntryDetail';
-import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, NavLink } from 'reactstrap';
-
-
+import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, } from 'reactstrap';
+import EntryCreate from './components/EntryCreate';
+// import EntryAddDForm from './components/EntryAddForm';
 
 const url = 'http://206.189.212.188:8000/api/';
 
@@ -26,16 +29,19 @@ class App extends React.Component {
             accessToken: '',
             refreshToken: '',
             entrys: [],
-            redirectToLogin: false,
+            // redirectToLogin: false,
+            // redirectToAdd: false,
         }
         this.loginHandler = this.loginHandler.bind(this);
         this.createHandler = this.createHandler.bind(this);
         this.updateHandler = this.updateHandler.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
+        // this.renderEntryCreate = this.renderEntryCreate.bind(this);
         this.renderEntryDetail = this.renderEntryDetail.bind(this);
         this.routeChange = this.routeChange.bind(this);
-        // this.renderEntryForum = this.renderEntryForum.bind(this);
-        // this.renderLoginForum = this.renderLoginForum.bind(this);
+        this.routeChangeTwo = this.routeChangeTwo.bind(this);
+        this.createEntryHandler = this.createEntryHandler.bind(this);
+   
     }
 
     async componentDidMount() {
@@ -177,41 +183,6 @@ class App extends React.Component {
 
     }
 
-    // renderEntryForm(props) {
-
-    //     // if (!this.state.accessToken) {
-    //     //     return <Redirect to="/" />
-    //     // }
-
-    //     const entryId = parseInt(props.match.params.id);
-
-    //     const entry = this.state.entrys && this.state.entrys.find(entry => entry.id === entryId);
-
-    //     if (entry) {
-    //         return <this.EntryForm entry={entry} onSubmit={this.updateHandler} onDelete={this.deleteHandler} />
-    //     } else {
-    //         return <Redirect to="/" />
-    //     }
-    // }
-
-
-    // renderLoginForm(props) {
-
-    //     // if (!this.state.accessToken) {
-    //     //     return <Redirect to="/" />
-    //     // }
-
-    //     const entryId = parseInt(props.match.params.id);
-
-    //     const entry = this.state.entrys && this.state.entrys.find(entry => entry.id === entryId);
-
-    //     if (entry) {
-    //         return <this.LoginForm entry={entry} onSubmit={this.updateHandler} onDelete={this.deleteHandler} />
-    //     } else {
-    //         return <Redirect to="/" />
-    //     }
-    // }
-
     renderEntryDetail(props) {
 
         // if (!this.state.accessToken) {
@@ -229,6 +200,17 @@ class App extends React.Component {
         }
     }
 
+    createEntryHandler(entry) {
+
+        entry.id = Math.floor(Math.random() * 1000); // DANGER: don't do this in production, just getting to temporarily work until we get an api
+    
+        const entrys = [...this.state.entrys, entry]// same as this.state.things.concat(thing) but more common in react
+    
+        this.setState({
+            entrys: entrys // see alternate style below
+        })
+      }
+
     routeChange() {
         
         this.setState({
@@ -237,25 +219,45 @@ class App extends React.Component {
 
     }
 
+    routeChangeTwo() {
+        
+        this.setState({
+            redirectToAdd: true,
+        })
+
+    }   
+
     render() {
         return (
             <Router>
 
                 <div className="App">
-
+                    <Nav />
                     <Switch>
  
                         <Route exact path="/">
                             {this.state.redirectToLogin ? <Redirect to="/login" /> : 
                             <HomePage entrys={this.state.entrys} createHandler={this.createHandler} routeChange={this.routeChange} />
                         }
+                        <>
+                            <EntryCounter entrys={this.state.entrys} />
+                        </>
+                        </Route>
+                        <Route path="/about" >
+                            <h1>About Page</h1>
                         </Route>
                         <Route exact path="/login" component={LoginPage} />
+                        <Route exact path="/login">
+                            {this.state.redirectToAdd ? <Redirect to="/forum" /> : 
+                            <AddPage entrys={this.state.entrys} createHandler={this.createHandler} routeChangeTwo={this.routeChangeTwo} />
+                        }
+                        </Route>
+                        <Route exact path="/form"  >
+                            <EntryCreate onSubmitEntry={this.createEntryHandler} />
+                        </Route>
                         <Route path="/:id" render={this.renderEntryDetail} />
                      
-                           
-
-                      
+                
 
                     </Switch>
 
@@ -274,6 +276,16 @@ function LoginPage(props) {
         )
 }
 
+function EntryAddPage(props) {
+    const fakeEntry = {title : 'fake' }
+    return (
+        <div>
+            <EntryCreate entry={fakeEntry}/>
+  
+        </div>
+        )
+}
+
 
 function HomePage(props) {
     return (
@@ -281,9 +293,27 @@ function HomePage(props) {
 
         <EntryList entrys={props.entrys} onSubmit={props.createHandler} />
 
-        <Row>
+        {/* <Row>}
             <Col xs="6">
                 <Button color="primary" className="px-4" onClick={props.routeChange}>
+                    Login
+                </Button>
+            </Col>
+        </Row> */}
+
+    </div>
+    )
+}
+
+function AddPage(props) {
+    return (
+    <div>
+
+        <EntryList entrys={props.entrys} onSubmit={props.createHandler} />
+
+        <Row>
+            <Col xs="6">
+                <Button color="primary" className="px-4" onClick={props.routeChangeTwo}>
                     Login
                 </Button>
             </Col>
@@ -293,6 +323,20 @@ function HomePage(props) {
     )
 }
 
+function EntryCounter({ entrys }) {
+    return <p># of Happy Hours : {entrys.length}</p>
+  }
 
-
+function Nav(props) {
+return (
+    <nav>
+        <ul>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/about">About Us</NavLink></li>
+            <li><NavLink to="/login">Login</NavLink></li>
+        </ul>
+    </nav>
+)
+}
+  
 export default App;
