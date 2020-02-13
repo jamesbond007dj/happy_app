@@ -12,6 +12,8 @@ import {
 import LoginForm from './components/LoginForm';
 import EntryList from './components/EntryList';
 import EntryDetail from './components/EntryDetail';
+import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, NavLink  } from 'reactstrap';
+
 
 
 const url = 'http://206.189.212.188:8000/api/';
@@ -30,6 +32,8 @@ class App extends React.Component {
         this.updateHandler = this.updateHandler.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
         this.renderEntryDetail = this.renderEntryDetail.bind(this);
+        // this.renderEntryForum = this.renderEntryForum.bind(this);
+        // this.renderLoginForum = this.renderLoginForum.bind(this);
     }
     
     async componentDidMount() {
@@ -52,6 +56,32 @@ class App extends React.Component {
     }
 
     async loginHandler({access, refresh}) {
+        this.setState({
+            accessToken : access,
+            refreshToken : refresh,
+        });
+
+        try {
+            const headers = {
+                headers: {
+                    Authorization: `Bearer ${this.state.accessToken}`
+                }
+            }
+            const response = await axios.get(url + 'v1/');
+
+            console.log(response.data);
+
+            this.setState({
+                entrys: response.data
+            });
+
+        } catch (error) {
+            console.error('Token Error');
+        }
+
+    }
+
+    async DirectHandler({access, refresh}) {
         this.setState({
             accessToken : access,
             refreshToken : refresh,
@@ -145,11 +175,46 @@ class App extends React.Component {
 
     }
 
+    // renderEntryForm(props) {
+
+    //     // if (!this.state.accessToken) {
+    //     //     return <Redirect to="/" />
+    //     // }
+
+    //     const entryId = parseInt(props.match.params.id);
+
+    //     const entry = this.state.entrys && this.state.entrys.find(entry => entry.id === entryId);
+
+    //     if (entry) {
+    //         return <this.EntryForm entry={entry} onSubmit={this.updateHandler} onDelete={this.deleteHandler} />
+    //     } else {
+    //         return <Redirect to="/" />
+    //     }
+    // }
+
+
+    // renderLoginForm(props) {
+
+    //     // if (!this.state.accessToken) {
+    //     //     return <Redirect to="/" />
+    //     // }
+
+    //     const entryId = parseInt(props.match.params.id);
+
+    //     const entry = this.state.entrys && this.state.entrys.find(entry => entry.id === entryId);
+
+    //     if (entry) {
+    //         return <this.LoginForm entry={entry} onSubmit={this.updateHandler} onDelete={this.deleteHandler} />
+    //     } else {
+    //         return <Redirect to="/" />
+    //     }
+    // }
+
     renderEntryDetail(props) {
 
-        // if (!this.state.accessToken) {
-        //     return <Redirect to="/" />
-        // }
+        if (!this.state.accessToken) {
+            return <Redirect to="/" />
+        }
 
         const entryId = parseInt(props.match.params.id);
 
@@ -161,8 +226,6 @@ class App extends React.Component {
             return <Redirect to="/" />
         }
     }
-
-
     render() {
         return (
             <Router>
@@ -177,6 +240,18 @@ class App extends React.Component {
                             <EntryList entrys={this.state.entrys} onSubmit={this.createHandler} /> :
                             <LoginForm onSuccess={this.loginHandler} />} */}
                          <EntryList entrys={this.state.entrys} onSubmit={this.createHandler} /> :
+                         {/* <LoginForm onSuccess={this.loginHandler} /> : */}
+
+                        <Row>
+                            <Col xs="6">                      
+                                <Button color="primary" className="px-4" onClick={this.routeChange}>
+                                  Login
+                                </Button>
+                            </Col>
+                            <Col xs="6" className="text-right">
+                                <Button color="link" className="px-0">Forgot password?</Button>
+                            </Col>
+                        </Row>
 
                     </Route>
 
