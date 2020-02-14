@@ -7,7 +7,7 @@ import EntryCreateForm from './EntryCreateForm'
 
 export default props => (
     <>
-        <Link to="/"></Link>
+        {/* <Link to="/"></Link> */}
         <EntryCreateForm onSubmit={props.onSubmit} entry={props.entry} />
     </>
 )
