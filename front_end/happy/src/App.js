@@ -51,7 +51,7 @@ class App extends React.Component {
     async componentDidMount() {
 
         try {
-            const response = await axios.get(url + 'v1/');
+            const response = await axios.get(url + 'v1/current');
 
             console.log(response.data);
 
@@ -89,7 +89,7 @@ class App extends React.Component {
                     Authorization: `Bearer ${this.state.accessToken}`
                 }
             }
-            const response = await axios.get(url + 'v1/');
+            const response = await axios.get(url + 'v1/current');
 
             console.log(response.data);
 
