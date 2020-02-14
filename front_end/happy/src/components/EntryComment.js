@@ -40,17 +40,16 @@ class EntryComment extends Component {
     render() {
         return (
             <>
-                <form onSubmit={this.submitHandler}>
-                    <fieldset>
-                        <legend>
-                            Post
-                        </legend>
-                        <input name="title" type="text" placeholder="title" value={this.state.title} onChange={this.changeHandler} />
-                        <textarea name="comment" placeholder="comment" cols="30" rows="10" value={this.state.comment} onChange={this.changeHandler}></textarea>
-                        <button className='submitButton'>ok</button>
-                    </fieldset>
-                </form>
-            </>
+            <form onSubmit={this.submitHandler}>
+                <fieldset class="commentForm">
+                    <legend>
+                        CREATE HAPPY HOUR
+                    </legend>
+                    <textarea name="body" placeholder="comment" cols="30" rows="10" value={this.state.description} onChange={this.changeHandler}></textarea>
+                    <button className='submitButton'>ok</button>
+                </fieldset>
+            </form>
+        </>
         )
     }
 }
