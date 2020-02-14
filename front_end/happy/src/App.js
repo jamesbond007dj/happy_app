@@ -68,26 +68,9 @@ class App extends React.Component {
         this.setState({
             accessToken: access,
             refreshToken: refresh,
-        });
+            redirectToLogin: true,
 
-        try {
-            const headers = {
-                headers: {
-                    Authorization: `Bearer ${this.state.accessToken}`
-                }
-            }
-            const response = await axios.get(url + 'v1/');
-
-            console.log(response.data);
-
-            this.setState({
-                entrys: response.data
-            });
-
-        } catch (error) {
-            console.error('Token Error');
-        }
-
+        })
     }
 
     async DirectHandler({ access, refresh }) {
@@ -236,7 +219,7 @@ class App extends React.Component {
             <Router>
 
                 <div className="App">
-                    <Nav />
+                    <Nav showLogin={this.state.redirectToLogin} />
                     <Switch>
  
                         <Route exact path="/">
