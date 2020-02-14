@@ -6,8 +6,8 @@ class EntryComment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: props.entry.title,
-            description: props.entry.description,
+            title: props.entry.body,
+            
         }
         this.changeHandler = this.changeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
@@ -15,8 +15,8 @@ class EntryComment extends Component {
 
     static defaultProps = {
         entry: {
-            title: '',
-            description: '',
+            body: '',
+        
         }
     }
 
@@ -32,8 +32,7 @@ class EntryComment extends Component {
         const data = {...this.state};
         this.props.onSubmit(data);
         this.setState({
-            title: '',
-            description: ''
+            body: ''
         })
     }
 
@@ -43,9 +42,9 @@ class EntryComment extends Component {
             <form onSubmit={this.submitHandler}>
                 <fieldset class="commentForm">
                     <legend>
-                        CREATE HAPPY HOUR
+                        PLEASE ADD YOUR COMMENT
                     </legend>
-                    <textarea name="body" placeholder="comment" cols="30" rows="10" value={this.state.description} onChange={this.changeHandler}></textarea>
+                    <textarea name="body" placeholder="Please add comment" cols="30" rows="10" value={this.state.body} onChange={this.changeHandler}></textarea>
                     <button className='submitButton'>ok</button>
                 </fieldset>
             </form>
