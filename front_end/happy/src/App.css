@@ -4,11 +4,24 @@
 body {
   background: url(https://c1.wallpaperflare.com/preview/75/797/190/neon-neon-font-advertisement-advertising.jpg) no-repeat;
   background-size: 100%;
+
 }
 
 ul {
   width: 70%;
   margin: auto;
+  
+}
+.thewrapper{
+  background-color: grey;
+  opacity: 0.9;
+  width: 75%;
+  margin: auto;
+  font-size: 3px;
+  color: aqua;
+  /* -webkit-text-stroke: 1px black; */
+  margin: auto;
+
 }
 
 li {
@@ -49,7 +62,7 @@ li a:hover {
   display: inline-block;
   background-color: grey;
   border-radius: 10px;
-  border: 2px solid black;
+  border: 2px solid yellow;
   color: #eeeeee;
   text-align: center;
   font-size: 28px;
@@ -130,14 +143,15 @@ textarea:focus{
 }
 
 .testerr {
-  font-size: 3px;
+  /* font-size: 3px;
   color: yellow;
-  -webkit-text-stroke: 1px black;
+  -webkit-text-stroke: 1px black; */
+
 
   /* background-color: white; */
-  width: 500px;
+  /* width: 500px;
   height: 70px;
-  margin: auto;
+  margin: auto; */
   /* text-align: center; */
   /* padding-top: 10px; */
 }
