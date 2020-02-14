@@ -43,24 +43,7 @@ class LoginForm extends Component {
 
         event.preventDefault();
 
-        try {
-            const response = await axios.post(url + 'token/', {
-                username: this.state.username,
-                password: this.state.password,
-            });
-
-            this.props.onSuccess(response.data);
-
-        } catch (error) {
-            return (
-                <Route exact path="/form"  >
-                    <EntryCreateForm />
-                    <EntryCreate onSubmitEntry={this.createEntryHandler} />
-                </Route>
-            )
-
-        }
-
+        this.props.onSubmit({access:'', refresh:''});
 
     }
 

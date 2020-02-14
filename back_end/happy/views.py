@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Entry, StartTime, EndTime
-from .serializers import EntrySerializer
+from .models import Entry, StartTime, EndTime, Comment
+from .serializers import EntrySerializer, CommentSerializer
 from .permissions import IsAuthorOrReadOnly
 from datetime import datetime
 from calendar import day_name
@@ -46,3 +46,7 @@ def is_current(e,times):
         return True
     else:
       return False
+
+class CommentListView(generics.ListCreateAPIView):
+  queryset = Comment.objects.all()
+  serializer_class = CommentSerializer

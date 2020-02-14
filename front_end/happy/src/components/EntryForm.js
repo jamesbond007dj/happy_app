@@ -10,6 +10,7 @@ class EntryForm extends Component {
             times: props.entry.times,
             address: props.entry.address,
             description: props.entry.description,
+            comments: props.entry.comments,
         }
         this.changeHandler = this.changeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
@@ -22,6 +23,7 @@ class EntryForm extends Component {
             times: '',
             address:'',
             description: '',
+            comments: '',
         }
     }
 
@@ -43,21 +45,23 @@ class EntryForm extends Component {
             times: '',
             address:'',
             description: '',
+            comments: '',
         })
     }
 
     render() {
         return (
-            <> 
-                <div className='thewrapper'>
-                    <ul className='thewrapper'>
-                        <li className='title1'><h2>{this.state.title}</h2></li>
-                        <li className='title1'><h2>Menu : {this.state.menu}</h2></li>
-                        <li className='title1 times1'><h2>Happy Hours : {this.state.times}</h2></li>
-                        <li className='title1'><h2>Address : {this.state.address}</h2></li>
-                        <li className='title1'><h2>{this.state.description}</h2></li>
-                    </ul>
-                </div>
+
+            <>
+                <ul className='testerr'>
+                    <li className='title1'><h2>{this.state.title}</h2></li>
+                    <li className='title1'><h2>Menu : {this.state.menu}</h2></li>
+                    <li className='title1 times1'><h2>Happy Hours : {this.state.times}</h2></li>
+                    <li className='title1'><h2>Address : {this.state.address}</h2></li>
+                    <li className='title1'><h2>{this.state.description}</h2></li>
+                    <li className='title1'><h2>{this.state.comments}</h2></li>
+                </ul>
+
             </>
         )
     }
