@@ -33,10 +33,10 @@ class App extends React.Component {
             entrys: [],
             redirectToLogin: false,
             redirectHome: false,
+            redirectToEntryCreate: false,
             // redirectToAdd: false,
 
         }
-        this.loginHandler = this.loginHandler.bind(this);
         this.createHandler = this.createHandler.bind(this);
         this.updateHandler = this.updateHandler.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
@@ -71,7 +71,8 @@ class App extends React.Component {
         this.setState({
             accessToken: access,
             refreshToken: refresh,
-            redirectToLogin: true,
+            redirectToEntryCreate: true,
+            redirectHome: false,
 
         })
     }
@@ -198,7 +199,8 @@ class App extends React.Component {
 
         this.setState({
             entrys: entrys, // see alternate style below
-            redirectHome: true,
+            redirectToEntryCreate: false,
+            redirectHome: true
         })
 
       }
@@ -206,7 +208,6 @@ class App extends React.Component {
     renderEntryCreateForm() {
 
         if(this.state.redirectHome) {
-            this.setState({redirectHome:false});
             return <Redirect to="/" />
         } else {
             return <EntryCreateForm onSubmit={this.createEntryHandler} />
@@ -227,7 +228,7 @@ class App extends React.Component {
                         </Route>
                         <Route exact path="/login" >
 
-                            {this.state.redirectToLogin ? <Redirect to="/form" /> :
+                            {this.state.redirectToEntryCreate ? <Redirect to="/form" /> :
                             <LoginForm onSubmit={this.loginHandler} />
                         }
 
@@ -238,9 +239,8 @@ class App extends React.Component {
                             <>
                                 <EntryCounter entrys={this.state.entrys} />
                             </>
-                            {this.state.redirectToLogin ? <Redirect to="/login" /> :
                             <HomePage entrys={this.state.entrys} createHandler={this.createHandler} routeChange={this.routeChange} />
-                        }
+
 
                         </Route>
                         <Route path="/:id" render={this.renderEntryDetail} />

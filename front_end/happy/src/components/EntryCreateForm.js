@@ -27,7 +27,7 @@ class EntryCreateForm extends Component {
         event.preventDefault();
 
         const data = {...this.state};
-        this.props.onSubmit(data)
+        this.props.onSubmit(data);
     }
 
     render() {
