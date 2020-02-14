@@ -18,7 +18,7 @@ ul {
   width: 75%;
   margin: auto;
   font-size: 3px;
-  color: aqua;
+  color: #5FBB97;
   /* -webkit-text-stroke: 1px black; */
   margin: auto;
 
@@ -34,14 +34,15 @@ li:last-child {
 }
 
 li a {
+  /* background-color: grey; */
   text-decoration: none;
-  color: yellow;
+  color: #5FBB97;
   transition: font-size 0.3s ease, background-color 0.3s ease;
   /* display: block; */
   width: 200px;
 }
  a {
-   color: aqua;
+   color: #5FBB97;
  }
 
 li a:hover {
@@ -103,7 +104,7 @@ li a:hover {
   }
 
 .header {
-  color: aqua;
+  color: #5FBB97;
   font-size: 3vw;
 }
 
@@ -185,7 +186,7 @@ h2 {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: grey;
+  background-color: #5FBB97;
   width: 100%;
   text-align: center;
 }
@@ -197,7 +198,7 @@ h2 {
 
 .navbar a {
   display: block;
-  color: aqua;
+  color: #8DDCA4;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
