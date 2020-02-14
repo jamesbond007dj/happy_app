@@ -17,6 +17,7 @@ import EntryList from './components/EntryList';
 import EntryDetail from './components/EntryDetail';
 import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, } from 'reactstrap';
 import EntryCreate from './components/EntryCreate';
+import About from './About'
 // import EntryAddDForm from './components/EntryAddForm';
 
 const url = 'http://206.189.212.188:8000/api/';
@@ -247,7 +248,7 @@ class App extends React.Component {
 
                         </Route>
                         <Route path="/about" >
-                            <h1 class="header">About Page</h1>
+                            <About />
                         </Route>
                         <Route exact path="/login" component={LoginPage} />
                         <Route exact path="/form"  >
