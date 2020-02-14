@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Entry
+from .models import Entry, Comment
 
 
 class EntrySerializer(serializers.ModelSerializer):
@@ -12,5 +12,14 @@ class EntrySerializer(serializers.ModelSerializer):
             "description",
             "menu",
             "address",
-            'times'
+            'times',
+            'comments',
+        ]
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = [
+            'entry',
+            "body",
         ]

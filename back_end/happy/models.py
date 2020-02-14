@@ -38,6 +38,11 @@ class Entry(models.Model):
 
     return times_list        
   
+  @property
+  def comments(self):
+    return [i.body for i in self.comment_set.all()]
+     
+
   def __str__(self):
     return self.title
 
@@ -77,6 +82,6 @@ class EndTime(models.Model):
   )
   entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
 
-class Comment(models.Model): 
-  comment = models.TextField(null=True,blank=True)
+class Comment(models.Model):
+  body = models.TextField(null=True,blank=True)
   entry = models.ForeignKey(Entry, on_delete=models.CASCADE)

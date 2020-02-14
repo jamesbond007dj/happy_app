@@ -51,6 +51,7 @@ class EntryForm extends Component {
 
     render() {
         return (
+
             <>
                 <ul className='testerr'>
                     <li className='title1'><h2>{this.state.title}</h2></li>
@@ -60,6 +61,7 @@ class EntryForm extends Component {
                     <li className='title1'><h2>{this.state.description}</h2></li>
                     <li className='title1'><h2>{this.state.comments}</h2></li>
                 </ul>
+
             </>
         )
     }
