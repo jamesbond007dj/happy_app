@@ -1,11 +1,18 @@
+html, body {
+  height: 100%;
+}
+
+html {
+  background-color: #191919;
+}
+
 .App {
   text-align: center;
 }
 body {
   /* background-color: black; */
 
-  background: url('./assets/back.png') no-repeat;
-  /* background: url(https://c1.wallpaperflare.com/preview/75/797/190/neon-neon-font-advertisement-advertising.jpg) no-repeat; */
+  background: url('./assets/happy_background_4.png') no-repeat;
   background-size: 100%;
 
 }
@@ -125,8 +132,8 @@ li a:hover {
 form{
   font: 95% Arial, Helvetica, sans-serif;
   margin: auto;
+  max-width: 75%;
   /* margin-right: 500px; */
-	max-width: 400px;
   /* margin: 50px auto;  */
 
 }
