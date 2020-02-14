@@ -27,6 +27,7 @@ ul {
 li {
   font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
   border-bottom: 1px solid #ccc;
+  list-style: none;
 }
 
 li:last-child {
@@ -48,6 +49,12 @@ li a {
 li a:hover {
   font-size: 30px;
   background: #f6f6f6;
+}
+.listt {
+  background-color: black;
+  list-style-type: none;
+  opacity: 0.7;
+  padding: 20px;
 }
 
 
@@ -144,7 +151,7 @@ textarea:focus{
 }
 
 .testerr {
-  background-color: grey;
+  background-color: black;
   opacity: 0.8;
   color: #43D1AF;
 }
