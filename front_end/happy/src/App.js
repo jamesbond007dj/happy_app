@@ -11,13 +11,14 @@ import {
    
 } from "react-router-dom";
 
-import EntryCreateForm from './components/EntryCreateForm';
 import LoginForm from './components/LoginForm';
 import EntryList from './components/EntryList';
 import EntryDetail from './components/EntryDetail';
 import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, } from 'reactstrap';
 import EntryCreate from './components/EntryCreate';
 import About from './About'
+import EntryCreateForm from './components/EntryCreateForm';
+import EntryComment from './components/EntryComment';
 // import EntryAddDForm from './components/EntryAddForm';
 
 const url = 'http://206.189.212.188:8000/api/';
@@ -30,18 +31,17 @@ class App extends React.Component {
             accessToken: '',
             refreshToken: '',
             entrys: [],
-            // redirectToLogin: false,
+            redirectToLogin: false,
             // redirectToAdd: false,
         }
         this.loginHandler = this.loginHandler.bind(this);
         this.createHandler = this.createHandler.bind(this);
         this.updateHandler = this.updateHandler.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
-        // this.renderEntryCreate = this.renderEntryCreate.bind(this);
-        this.renderEntryDetail = this.renderEntryDetail.bind(this);
-        this.routeChange = this.routeChange.bind(this);
-        this.routeChangeTwo = this.routeChangeTwo.bind(this);
         this.createEntryHandler = this.createEntryHandler.bind(this);
+        this.renderEntryDetail = this.renderEntryDetail.bind(this);
+        // this.routeChange = this.routeChange.bind(this);
+        // this.routeChangeTwo = this.routeChangeTwo.bind(this);
         this.loginHandler = this.loginHandler.bind(this);
     }
 
@@ -101,18 +101,18 @@ class App extends React.Component {
 
     async createHandler(data) {
 
-        const headers = {
-            headers: {
-                Authorization: `Bearer ${this.state.accessToken}`
-            }
-        }
+        // const headers = {
+        //     headers: {
+        //         Authorization: `Bearer ${this.state.accessToken}`
+        //     }
+        // }
 
         const response = await axios.post(url + 'v1/', data);
 
         console.log(response.data);
 
         this.setState({
-            entrys: this.state.entrys.concat(response.data)
+            entrys: this.state.entrys.concat([response.data])
         })
 
 
@@ -178,40 +178,46 @@ class App extends React.Component {
         const entry = this.state.entrys && this.state.entrys.find(entry => entry.id === entryId);
 
         if (entry) {
-            return <EntryDetail entry={entry} onSubmit={this.updateHandler} onDelete={this.deleteHandler} />
-        } else {
+            return (
+                <>
+                    <EntryDetail entry={entry} onSubmit={this.updateHandler}  />
+                </>
+            )} else {
             return <Redirect to="/" />
         }
     }
 
     createEntryHandler(entry) {
 
-        return <h1 class="header">HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</h1>
 
-    //     entry.id = Math.floor(Math.random() * 1000); // DANGER: don't do this in production, just getting to temporarily work until we get an api
+        entry.id = Math.floor(Math.random() * 1000); // DANGER: don't do this in production, just getting to temporarily work until we get an api
     
-    //     const entrys = [...this.state.entrys, entry]// same as this.state.things.concat(thing) but more common in react
-    
-    //     this.setState({
-    //         entrys: entrys // see alternate style below
-    //     })
+        const entrys = [...this.state.entrys, entry]// same as this.state.things.concat(thing) but more common in react
+        console.log(entrys)
+        
+        this.setState({
+            entrys: entrys // see alternate style below
+
+        })
+
+        if (entry) {
+            return (
+                <>
+                    <EntryCreate entry={entry} onSubmit={this.createHandler}  />
+                </>
+            )} else {
+            return <Redirect to="/" />
+        }
       }
 
-    routeChange() {
+    // routeChange() {
         
-        this.setState({
-            redirectToLogin: true,
-        })
+    //     this.setState({
+    //         redirectToLogin: true,
+    //     })
 
-    }
+    // }
 
-    routeChangeTwo() {
-        
-        this.setState({
-            redirectToAdd: true,
-        })
-
-    }   
 
 
     render() {
@@ -219,9 +225,26 @@ class App extends React.Component {
             <Router>
 
                 <div className="App">
-                    <Nav showLogin={this.state.redirectToLogin} />
+                    <Nav />
                     <Switch>
  
+
+                        <Route exact path="/about" >
+                            <About />
+                        </Route>
+                        <Route exact path="/login" >
+        
+                            {this.state.redirectToLogin ? <Redirect to="/form" /> : 
+                            <LoginForm onSubmit={this.loginHandler} />
+                        }
+                        
+                        </Route>
+                        <Route exact path="/form"  >
+                            {/* {this.state.redirectToLogin ?  <Redirect to="/" /> :  */}
+                            <FormPage createEntryHandler={this.createEntryHandler} /> 
+                            {/* }    */}
+                        
+                        </Route>
                         <Route exact path="/">
                             <>
                                 <EntryCounter entrys={this.state.entrys} />
@@ -230,26 +253,6 @@ class App extends React.Component {
                             <HomePage entrys={this.state.entrys} createHandler={this.createHandler} routeChange={this.routeChange} />
                         }
 
-                        </Route>
-                        <Route path="/about" >
-                            <About />
-                        </Route>
-                        <Route exact path="/login" >
-        
-                                {this.state.redirectToLogin ? <Redirect to="/form" /> : 
-                                <LoginForm onSubmit={this.loginHandler} />
-                                }   
-                        
-                        </Route>
-                        {/* <Route exact path="/login">
-
-                            {this.state.accessToken ?
-                            <EntryCreate onSubmit={this.EventCreateHandler} /> :
-                            <LoginForm onSuccess={this.loginHandler} />}
-
-                        </Route> */}
-                        <Route exact path="/form"  >
-                            <EntryCreate />
                         </Route>
                         <Route path="/:id" render={this.renderEntryDetail} />
                      
@@ -275,9 +278,20 @@ function HomePage(props) {
     )
 }
 
+function FormPage(props) {
+    return (
+    <div>
+
+        <EntryCreate entrys={props.entrys} onSubmit={props.createEntryHandler} />
+
+    </div>
+    )
+}
+
+
 
 function EntryCounter({ entrys }) {
-    return <h2 class="header">Number of Happy Hours : {entrys.length}</h2>
+    return <h2 className="header">NOW YOU CAN CATCH {entrys.length} HAPPY HOURS</h2>
   }
 
 function Nav(props) {
@@ -287,6 +301,7 @@ return (
             <li className='navbar'><NavLink to="/">Home</NavLink></li>
             <li className='navbar'><NavLink to="/about">About Us</NavLink></li>
             <li className='navbar'><NavLink to="/login">Login</NavLink></li>
+    
         </ul>
     </nav>
 )

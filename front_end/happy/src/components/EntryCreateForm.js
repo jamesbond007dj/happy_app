@@ -10,6 +10,7 @@ class EntryCreateForm extends Component {
             times: props.entry.times,
             address: props.entry.address,
             description: props.entry.description,
+            submitted : false,
         }
         this.changeHandler = this.changeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
@@ -35,8 +36,10 @@ class EntryCreateForm extends Component {
 
     submitHandler(event) {
         event.preventDefault();
+        const data = { 'title' : this.state.title, 'menu': this.state.menu, 'times': this.state.times, 'address': this.state.address, 'description': this.state.description  }
+        this.props.onSubmit(data)
+        this.setState({ submitted : true })
         
-        // TURN BACK HERE FOR POST
         // const data = {...this.state};
         // this.props.onSubmit(data);
         // this.setState({
@@ -61,7 +64,7 @@ class EntryCreateForm extends Component {
                     <input name="times" type="text" placeholder="times" value={this.state.times} onChange={this.changeHandler} />
                     <input name="address" type="text" placeholder="address" value={this.state.address} onChange={this.changeHandler} />
                     <textarea name="description" placeholder="description" cols="30" rows="5" value={this.state.description} onChange={this.changeHandler}></textarea>
-                    <button className='submitButton'>ok</button>
+                    <button className='submitButton' type='submit'>Submit</button>
                 </fieldset>
             </form>
         </>
