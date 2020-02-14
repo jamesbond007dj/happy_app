@@ -1,4 +1,5 @@
 import React from 'react';
+import Photoo from './assets/chicken.jpeg'
 
 
 class About extends React.Component {
@@ -6,41 +7,19 @@ class About extends React.Component {
     return (
       <>
         <div class="bio">
-          <div className='testimage'></div>
-          <img src ="./assets/chicken.jpeg" />
-
-
-          <p>James Bond
-
-          </p>
+          <img className='testimage' src={Photoo} />
+          <p className='ourNames'>James Bond</p>
         </div>
 
         <div class="bio">
-
-        <div className='testimage'></div>
-
-          <p>Ting
-
-          </p>
+        <img className='testimage' src={Photoo} />
+          <p className='ourNames'>Ting</p>
         </div>
 
         <div class="bio">
-
-        <div className='testimage'></div>
-
-          <p>Sharmarke
-          </p>
+        <img className='testimage' src={Photoo} />
+          <p className='ourNames'>Sharmarke</p>
         </div>
-
-        <div class="bio">
-
-        <div className='testimage'></div>
-
-          <p>
-            
-          </p>
-        </div>
-
     </>
     )
   }

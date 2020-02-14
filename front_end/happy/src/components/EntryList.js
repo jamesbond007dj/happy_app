@@ -17,7 +17,7 @@ export default props => (
 const EntryItem = props => (
     <li>
         <Link to={`/${props.entry.id}`}>
-            <p>
+            <p className='listt'>
                 {props.entry.title}
             </p>
         </Link>
