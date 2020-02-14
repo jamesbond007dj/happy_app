@@ -164,3 +164,32 @@ h2 {
 .bio {
   color: white;
 }
+
+
+.navbarUl {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: grey;
+  width: 100%;
+  text-align: center;
+}
+
+.navbar {
+  display: inline-block;
+  text-align: center;
+}
+
+.navbar a {
+  display: block;
+  color: aqua;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.navbar a:hover {
+  background-color: #111;
+}

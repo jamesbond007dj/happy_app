@@ -295,10 +295,10 @@ function EntryCounter({ entrys }) {
 function Nav(props) {
 return (
     <nav>
-        <ul>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/about">About Us</NavLink></li>
-            <li><NavLink to="/login">Login</NavLink></li>
+        <ul className='navbarUl'>
+            <li className='navbar'><NavLink to="/">Home</NavLink></li>
+            <li className='navbar'><NavLink to="/about">About Us</NavLink></li>
+            <li className='navbar'><NavLink to="/login">Login</NavLink></li>
         </ul>
     </nav>
 )
