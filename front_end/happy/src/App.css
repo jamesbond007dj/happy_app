@@ -2,7 +2,10 @@
   text-align: center;
 }
 body {
-  background: url(https://c1.wallpaperflare.com/preview/75/797/190/neon-neon-font-advertisement-advertising.jpg) no-repeat;
+  /* background-color: black; */
+
+  background: url('./assets/back.png') no-repeat;
+  /* background: url(https://c1.wallpaperflare.com/preview/75/797/190/neon-neon-font-advertisement-advertising.jpg) no-repeat; */
   background-size: 100%;
 
 }
@@ -39,7 +42,7 @@ li a {
   color: #5FBB97;
   transition: font-size 0.3s ease, background-color 0.3s ease;
   /* display: block; */
-  width: 200px;
+  /* width: 200px; */
 }
  a {
    color: #5FBB97;
@@ -50,10 +53,12 @@ li a:hover {
   background: #f6f6f6;
 }
 .listt {
-  background-color: black;
+  color: yellow;
+  /* -webkit-text-stroke: 2px yellow; */
+
   list-style-type: none;
   opacity: 0.7;
-  padding: 20px;
+  /* padding: 20px; */
   /* font-size: 30px; */
 }
 
@@ -112,7 +117,7 @@ li a:hover {
 
 .header {
   color: #5FBB97;
-  font-size: 3vw;
+  font-size: 35px;
 }
 
 /* Form design from https://www.sanwebe.com/2014/08/css-html-forms-designs */
@@ -151,9 +156,9 @@ textarea:focus{
 }
 
 .testerr {
-  background-color: black;
+  /* background-color: black; */
   opacity: 0.8;
-  color: #43D1AF;
+  color: yellow;
 }
 .title1 {
   /* font: 200 20px/1.5 Helvetica, Verdana, sans-serif; */
