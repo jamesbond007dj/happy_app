@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
-import EntryAddDetail from './EntryCreate'
+import EntryCreate from './EntryCreate'
 
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Redirect,
+
 } from "react-router-dom";
 
-import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, NavLink } from 'reactstrap';
 
 
 
@@ -66,8 +66,8 @@ class LoginForm extends Component {
     }
 
     render() {
-        return (
-            <Router>
+        return (            
+        <Router>
 
             <div className="App">
 
@@ -80,7 +80,7 @@ class LoginForm extends Component {
                             <button onClick={this.routeChangeTwo}>ok</button>
                         </form>
                         {this.state.redirectToForm ? <Redirect to="/form" /> : 
-                        <EntryAddDetail routeChangeTwo={this.routeChangeTwo} />
+                        <EntryCreate routeChangeTwo={this.routeChangeTwo} />
                     }
                     </Route>
     
@@ -92,9 +92,7 @@ class LoginForm extends Component {
                 </Switch>
 
             </div> 
-        </Router>
-        
-      )
+        </Router>)
     }
 
 }
@@ -103,3 +101,4 @@ class LoginForm extends Component {
 
 
 export default LoginForm;
+

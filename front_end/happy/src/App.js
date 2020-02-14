@@ -203,13 +203,15 @@ class App extends React.Component {
 
     createEntryHandler(entry) {
 
-        entry.id = Math.floor(Math.random() * 1000); // DANGER: don't do this in production, just getting to temporarily work until we get an api
+        return <h1 class="header">HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</h1>
+
+    //     entry.id = Math.floor(Math.random() * 1000); // DANGER: don't do this in production, just getting to temporarily work until we get an api
     
-        const entrys = [...this.state.entrys, entry]// same as this.state.things.concat(thing) but more common in react
+    //     const entrys = [...this.state.entrys, entry]// same as this.state.things.concat(thing) but more common in react
     
-        this.setState({
-            entrys: entrys // see alternate style below
-        })
+    //     this.setState({
+    //         entrys: entrys // see alternate style below
+    //     })
       }
 
     routeChange() {
@@ -237,23 +239,20 @@ class App extends React.Component {
                     <Switch>
  
                         <Route exact path="/">
+                            <>
+                                <EntryCounter entrys={this.state.entrys} />
+                            </>
                             {this.state.redirectToLogin ? <Redirect to="/login" /> : 
                             <HomePage entrys={this.state.entrys} createHandler={this.createHandler} routeChange={this.routeChange} />
                         }
-                        <>
-                            <EntryCounter entrys={this.state.entrys} />
-                        </>
+
                         </Route>
                         <Route path="/about" >
                             <About />
                         </Route>
                         <Route exact path="/login" component={LoginPage} />
-                        <Route exact path="/login">
-                            {this.state.redirectToAdd ? <Redirect to="/forum" /> : 
-                            <AddPage entrys={this.state.entrys} createHandler={this.createHandler} routeChangeTwo={this.routeChangeTwo} />
-                        }
-                        </Route>
                         <Route exact path="/form"  >
+                            <EntryCreateForm />
                             <EntryCreate onSubmitEntry={this.createEntryHandler} />
                         </Route>
                         <Route path="/:id" render={this.renderEntryDetail} />
@@ -277,16 +276,6 @@ function LoginPage(props) {
         )
 }
 
-function EntryAddPage(props) {
-    const fakeEntry = {title : 'fake' }
-    return (
-        <div>
-            <EntryCreate entry={fakeEntry}/>
-  
-        </div>
-        )
-}
-
 
 function HomePage(props) {
     return (
@@ -294,38 +283,13 @@ function HomePage(props) {
 
         <EntryList entrys={props.entrys} onSubmit={props.createHandler} />
 
-        {/* <Row>}
-            <Col xs="6">
-                <Button color="primary" className="px-4" onClick={props.routeChange}>
-                    Login
-                </Button>
-            </Col>
-        </Row> */}
-
     </div>
     )
 }
 
-function AddPage(props) {
-    return (
-    <div>
-
-        <EntryList entrys={props.entrys} onSubmit={props.createHandler} />
-
-        <Row>
-            <Col xs="6">
-                <Button color="primary" className="px-4" onClick={props.routeChangeTwo}>
-                    Login
-                </Button>
-            </Col>
-        </Row>
-
-    </div>
-    )
-}
 
 function EntryCounter({ entrys }) {
-    return <p># of Happy Hours : {entrys.length}</p>
+    return <h2 class="header">Number of Happy Hours : {entrys.length}</h2>
   }
 
 function Nav(props) {
@@ -341,3 +305,4 @@ return (
 }
   
 export default App;
+

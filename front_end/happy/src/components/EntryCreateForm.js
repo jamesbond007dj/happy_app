@@ -35,28 +35,36 @@ class EntryCreateForm extends Component {
 
     submitHandler(event) {
         event.preventDefault();
-        const data = {...this.state};
-        this.props.onSubmit(data);
-        this.setState({
-            title: '',
-            menu: '',
-            times: '',
-            address:'',
-            description: '',
-        })
+        
+        // TURN BACK HERE FOR POST
+        // const data = {...this.state};
+        // this.props.onSubmit(data);
+        // this.setState({
+        //     title: '',
+        //     menu: '',
+        //     times: '',
+        //     address:'',
+        //     description: '',
+        // })
     }
 
     render() {
         return (
             <>
-                <ul className='testerr'>
-                    <li className='title1'><h2>{this.state.title}</h2></li>
-                    <li className='title1'><h2>{this.state.menu}</h2></li>
-                    <li className='title1 times1'><h2>{this.state.times}</h2></li>
-                    <li className='title1'><h2>{this.state.address}</h2></li>
-                    <li className='title1'><h2>{this.state.description}</h2></li>
-                </ul>
-            </>
+            <form onSubmit={this.submitHandler}>
+                <fieldset>
+                    <legend>
+                        CREATE HAPPY HOUR
+                    </legend>
+                    <input name="title" type="text" placeholder="title" value={this.state.title} onChange={this.changeHandler} />
+                    <input name="menu" type="text" placeholder="menu" value={this.state.menu} onChange={this.changeHandler} />
+                    <input name="times" type="text" placeholder="times" value={this.state.times} onChange={this.changeHandler} />
+                    <input name="address" type="text" placeholder="address" value={this.state.address} onChange={this.changeHandler} />
+                    <textarea name="description" placeholder="description" cols="30" rows="10" value={this.state.description} onChange={this.changeHandler}></textarea>
+                    <button className='submitButton'>ok</button>
+                </fieldset>
+            </form>
+        </>
         )
     }
 }
