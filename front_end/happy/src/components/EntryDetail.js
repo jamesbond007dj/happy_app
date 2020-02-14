@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import EntryForm from './EntryForm'
-import EntryComment from './EntryComment'
+import EntryComment from './EntryCommentForm'
 
 
 export default props => (

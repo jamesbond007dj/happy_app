@@ -11,13 +11,13 @@ import {
    
 } from "react-router-dom";
 
-import EntryCreateForm from './components/EntryCreateForm';
 import LoginForm from './components/LoginForm';
 import EntryList from './components/EntryList';
 import EntryDetail from './components/EntryDetail';
 import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row, } from 'reactstrap';
 import EntryCreate from './components/EntryCreate';
 import About from './About'
+import EntryCreateForm from './components/EntryCreateForm';
 // import EntryAddDForm from './components/EntryAddForm';
 
 const url = 'http://206.189.212.188:8000/api/';
@@ -30,7 +30,7 @@ class App extends React.Component {
             accessToken: '',
             refreshToken: '',
             entrys: [],
-            // redirectToLogin: false,
+            redirectToLogin: false,
             // redirectToAdd: false,
         }
         this.loginHandler = this.loginHandler.bind(this);
@@ -41,7 +41,6 @@ class App extends React.Component {
         this.renderEntryDetail = this.renderEntryDetail.bind(this);
         this.routeChange = this.routeChange.bind(this);
         this.routeChangeTwo = this.routeChangeTwo.bind(this);
-        this.createEntryHandler = this.createEntryHandler.bind(this);
         this.loginHandler = this.loginHandler.bind(this);
     }
 
@@ -101,11 +100,11 @@ class App extends React.Component {
 
     async createHandler(data) {
 
-        const headers = {
-            headers: {
-                Authorization: `Bearer ${this.state.accessToken}`
-            }
-        }
+        // const headers = {
+        //     headers: {
+        //         Authorization: `Bearer ${this.state.accessToken}`
+        //     }
+        // }
 
         const response = await axios.post(url + 'v1/', data);
 
@@ -184,9 +183,9 @@ class App extends React.Component {
         }
     }
 
-    createEntryHandler(entry) {
+    // createEntryHandler(entry) {
 
-        return <h1 class="header">HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</h1>
+    //     return <h1 class="header">HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</h1>
 
     //     entry.id = Math.floor(Math.random() * 1000); // DANGER: don't do this in production, just getting to temporarily work until we get an api
     
@@ -195,7 +194,7 @@ class App extends React.Component {
     //     this.setState({
     //         entrys: entrys // see alternate style below
     //     })
-      }
+    //   }
 
     routeChange() {
         
@@ -241,15 +240,11 @@ class App extends React.Component {
                                 }   
                         
                         </Route>
-                        {/* <Route exact path="/login">
-
-                            {this.state.accessToken ?
-                            <EntryCreate onSubmit={this.EventCreateHandler} /> :
-                            <LoginForm onSuccess={this.loginHandler} />}
-
-                        </Route> */}
                         <Route exact path="/form"  >
-                            <EntryCreate />
+                                <FormPage />
+                            
+                            
+                        
                         </Route>
                         <Route path="/:id" render={this.renderEntryDetail} />
                      
@@ -275,9 +270,20 @@ function HomePage(props) {
     )
 }
 
+function FormPage(props) {
+    return (
+    <div>
+
+        <EntryCreate entrys={props.entrys} onSubmit={props.createHandler} />
+
+    </div>
+    )
+}
+
+
 
 function EntryCounter({ entrys }) {
-    return <h2 class="header">Number of Happy Hours : {entrys.length}</h2>
+    return <h2 class="header">NOW YOU CAN CATCH {entrys.length} HAPPY HOURS</h2>
   }
 
 function Nav(props) {
@@ -286,7 +292,9 @@ return (
         <ul className='navbarUl'>
             <li className='navbar'><NavLink to="/">Home</NavLink></li>
             <li className='navbar'><NavLink to="/about">About Us</NavLink></li>
-            <li className='navbar'><NavLink to="/login">Login</NavLink></li>
+            {props.showLogin ||
+                <li className='navbar'><NavLink to="/login">Login</NavLink></li>
+            }
         </ul>
     </nav>
 )
