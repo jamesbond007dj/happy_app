@@ -8,7 +8,7 @@ import {
     Route,
     Redirect,
     NavLink,
-   
+
 } from "react-router-dom";
 
 import LoginForm from './components/LoginForm';
@@ -32,14 +32,17 @@ class App extends React.Component {
             refreshToken: '',
             entrys: [],
             redirectToLogin: false,
+            redirectHome: false,
+            redirectToEntryCreate: false,
             // redirectToAdd: false,
+
         }
-        this.loginHandler = this.loginHandler.bind(this);
         this.createHandler = this.createHandler.bind(this);
         this.updateHandler = this.updateHandler.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
         this.createEntryHandler = this.createEntryHandler.bind(this);
         this.renderEntryDetail = this.renderEntryDetail.bind(this);
+        this.renderEntryCreateForm = this.renderEntryCreateForm.bind(this);
         // this.routeChange = this.routeChange.bind(this);
         // this.routeChangeTwo = this.routeChangeTwo.bind(this);
         this.loginHandler = this.loginHandler.bind(this);
@@ -68,7 +71,8 @@ class App extends React.Component {
         this.setState({
             accessToken: access,
             refreshToken: refresh,
-            redirectToLogin: true,
+            redirectToEntryCreate: true,
+            redirectHome: false,
 
         })
     }
@@ -189,36 +193,26 @@ class App extends React.Component {
 
     createEntryHandler(entry) {
 
-
         entry.id = Math.floor(Math.random() * 1000); // DANGER: don't do this in production, just getting to temporarily work until we get an api
-    
-        const entrys = [...this.state.entrys, entry]// same as this.state.things.concat(thing) but more common in react
-        console.log(entrys)
-        
-        this.setState({
-            entrys: entrys // see alternate style below
 
+        const entrys = [...this.state.entrys, entry]// same as this.state.things.concat(thing) but more common in react
+
+        this.setState({
+            entrys: entrys, // see alternate style below
+            redirectToEntryCreate: false,
+            redirectHome: true
         })
 
-        if (entry) {
-            return (
-                <>
-                    <EntryCreate entry={entry} onSubmit={this.createHandler}  />
-                </>
-            )} else {
-            return <Redirect to="/" />
-        }
       }
 
-    // routeChange() {
-        
-    //     this.setState({
-    //         redirectToLogin: true,
-    //     })
+    renderEntryCreateForm() {
 
-    // }
-
-
+        if(this.state.redirectHome) {
+            return <Redirect to="/" />
+        } else {
+            return <EntryCreateForm onSubmit={this.createEntryHandler} />
+        }
+    }
 
     render() {
         return (
@@ -227,40 +221,35 @@ class App extends React.Component {
                 <div className="App">
                     <Nav />
                     <Switch>
- 
+
 
                         <Route exact path="/about" >
                             <About />
                         </Route>
                         <Route exact path="/login" >
-        
-                            {this.state.redirectToLogin ? <Redirect to="/form" /> : 
+
+                            {this.state.redirectToEntryCreate ? <Redirect to="/form" /> :
                             <LoginForm onSubmit={this.loginHandler} />
                         }
-                        
+
                         </Route>
-                        <Route exact path="/form"  >
-                            {/* {this.state.redirectToLogin ?  <Redirect to="/" /> :  */}
-                            <FormPage createEntryHandler={this.createEntryHandler} /> 
-                            {/* }    */}
-                        
-                        </Route>
+                        <Route exact path="/form" render={this.renderEntryCreateForm}  />
+
                         <Route exact path="/">
                             <>
                                 <EntryCounter entrys={this.state.entrys} />
                             </>
-                            {this.state.redirectToLogin ? <Redirect to="/login" /> : 
                             <HomePage entrys={this.state.entrys} createHandler={this.createHandler} routeChange={this.routeChange} />
-                        }
+
 
                         </Route>
                         <Route path="/:id" render={this.renderEntryDetail} />
-                     
-                
+
+
 
                     </Switch>
 
-                </div> 
+                </div>
             </Router>
         );
     }
@@ -278,18 +267,6 @@ function HomePage(props) {
     )
 }
 
-function FormPage(props) {
-    return (
-    <div>
-
-        <EntryCreate entrys={props.entrys} onSubmit={props.createEntryHandler} />
-
-    </div>
-    )
-}
-
-
-
 function EntryCounter({ entrys }) {
     return <h2 className="header">NOW YOU CAN CATCH {entrys.length} HAPPY HOURS</h2>
   }
@@ -301,11 +278,11 @@ return (
             <li className='navbar'><NavLink to="/">Home</NavLink></li>
             <li className='navbar'><NavLink to="/about">About Us</NavLink></li>
             <li className='navbar'><NavLink to="/login">Login</NavLink></li>
-    
+
         </ul>
     </nav>
 )
 }
-  
+
 export default App;
 
