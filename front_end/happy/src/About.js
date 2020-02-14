@@ -7,6 +7,9 @@ class About extends React.Component {
       <>
         <div class="bio">
           <div className='testimage'></div>
+          <img src ="./assets/chicken.jpeg" />
+
+
           <p>James Bond
 
           </p>

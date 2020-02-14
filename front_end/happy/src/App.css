@@ -126,7 +126,7 @@ input, textarea {
 	background: #fff;
 	margin-bottom: 4%;
 	border: 1px solid #ccc;
-	padding: 3%;
+	/* padding: 3%; */
 	color: black;
   font: 95% Arial, Helvetica, sans-serif;
   opacity: 0.8;
@@ -207,4 +207,8 @@ h2 {
 /* Change the link color to #111 (black) on hover */
 .navbar a:hover {
   background-color: #111;
+}
+
+legend {
+  color: aqua;
 }
