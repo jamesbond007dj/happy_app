@@ -42,7 +42,7 @@ class App extends React.Component {
         this.routeChange = this.routeChange.bind(this);
         this.routeChangeTwo = this.routeChangeTwo.bind(this);
         this.createEntryHandler = this.createEntryHandler.bind(this);
-   
+        this.loginHandler = this.loginHandler.bind(this);
     }
 
     async componentDidMount() {
@@ -230,6 +230,7 @@ class App extends React.Component {
 
     }   
 
+
     render() {
         return (
             <Router>
@@ -250,10 +251,22 @@ class App extends React.Component {
                         <Route path="/about" >
                             <About />
                         </Route>
-                        <Route exact path="/login" component={LoginPage} />
+                        <Route exact path="/login" >
+        
+                                {this.state.redirectToLogin ? <Redirect to="/form" /> : 
+                                <LoginForm onSubmit={this.loginHandler} />
+                                }   
+                        
+                        </Route>
+                        {/* <Route exact path="/login">
+
+                            {this.state.accessToken ?
+                            <EntryCreate onSubmit={this.EventCreateHandler} /> :
+                            <LoginForm onSuccess={this.loginHandler} />}
+
+                        </Route> */}
                         <Route exact path="/form"  >
-                            <EntryCreateForm />
-                            <EntryCreate onSubmitEntry={this.createEntryHandler} />
+                            <EntryCreate />
                         </Route>
                         <Route path="/:id" render={this.renderEntryDetail} />
                      
@@ -267,14 +280,6 @@ class App extends React.Component {
     }
 }
 
-function LoginPage(props) {
-    return (
-        <div>
-            <LoginForm />
-  
-        </div>
-        )
-}
 
 
 function HomePage(props) {

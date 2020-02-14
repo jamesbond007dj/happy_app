@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
 import EntryCreate from './EntryCreate'
+import EntryCreateForm from './EntryCreateForm'
 
 import {
     BrowserRouter as Router,
@@ -24,11 +25,11 @@ class LoginForm extends Component {
         this.state = {
             username: '',
             password: '',
-            redirectToForm: false,
+          
         }
         this.obtainTokens = this.obtainTokens.bind(this);
         this.changeHandler = this.changeHandler.bind(this);
-        this.routeChangeTwo = this.routeChangeTwo.bind(this);
+        
     }
 
     changeHandler(event) {
@@ -51,49 +52,28 @@ class LoginForm extends Component {
             this.props.onSuccess(response.data);
 
         } catch (error) {
-            console.error('Unexpected Error Occured!!!', error);
+            return (
+                <Route exact path="/form"  >
+                    <EntryCreateForm />
+                    <EntryCreate onSubmitEntry={this.createEntryHandler} />
+                </Route>
+            )
+
         }
 
 
     }
 
-    routeChangeTwo() {
-        
-        this.setState({
-            redirectToForm: true,
-        })
-
-    }
 
     render() {
-        return (            
-        <Router>
-
-            <div className="App">
-
-                <Switch>
-
-                    <Route exact path="/login">
-                        <form onSubmit={this.obtainTokens}>
-                            <input name="username" type="text" value={this.state.username} placeholder="username" onChange={this.changeHandler}/>
-                            <input name="password" type="password" value={this.state.password} placeholder="password" onChange={this.changeHandler}/>
-                            <button onClick={this.routeChangeTwo}>ok</button>
-                        </form>
-                        {this.state.redirectToForm ? <Redirect to="/form" /> : 
-                        <EntryCreate routeChangeTwo={this.routeChangeTwo} />
-                    }
-                    </Route>
-    
-                 
-                       
-
-        
-
-                </Switch>
-
-            </div> 
-        </Router>)
-    }
+        return (  
+            <form onSubmit={this.obtainTokens}>
+                <input name="username" type="text" value={this.state.username} placeholder="username" onChange={this.changeHandler}/>
+                <input name="password" type="password" value={this.state.password} placeholder="password" onChange={this.changeHandler}/>
+            <button>ok</button>
+        </form>
+                     
+    )}
 
 }
 
